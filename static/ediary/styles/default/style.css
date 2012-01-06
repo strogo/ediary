@@ -1,0 +1,508 @@
+@charset 'utf-8';
+
+:focus {
+    outline: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.left {
+    float: left;
+}
+
+body {
+    font-family: Verdana, Tahoma, Arial, 'Times New Roman';
+    background: #f8f8f8 url('background-light.png');
+    font-size: 14px;
+    color: #222222;
+}
+
+article, aside, dialog, figure, footer, header, hgroup, nav, section {
+    display: block;
+}
+
+ul {
+    list-style: square;
+}
+
+a {
+    color: #396EA2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header#header, footer#footer, #main {
+    width: 965px;
+    margin: 0px auto;
+}
+
+/*---------------------------------------------------------------------------*
+ * HEADER SECTION
+ *---------------------------------------------------------------------------*/
+
+.header-wrapper {
+    background: #181818 url('background-dark.png');
+    border-bottom: 1px solid #555;
+    margin-bottom: 20px;
+}
+
+header#header {
+    height: 80px;
+}
+
+header#header img {
+    margin-left: -5px;
+    padding-top: 12px;
+    float: left;
+    width: 60px;
+    height: 60px;
+}
+
+header#header h1 {
+    padding-top: 13px;
+    margin-left: 70px;
+    font-size: 24px;
+    font-family: Verdana, Tahoma, Georgia, Arial;
+    font-weight: normal;
+}
+
+header#header h1 a {
+    color: #f0f0f0;
+}
+
+header#header h1 a:hover {
+    text-shadow: #ddd 0px 0px 2px;
+}
+
+header#header span.description {
+    font-size: 14px;
+    color: #ddd;
+    margin-left: 17px;
+}
+
+header#header nav {
+    font-family: 'Times New Roman';
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    clear: right;
+    position: relative;
+    display: block;
+    float: right;
+    top: -20px;
+    right: 0px;
+}
+
+header#header nav a {
+    float: right;
+    display: block;
+    color: #f0f0f0;
+    margin-left: 25px;
+    line-height: 36px;
+}
+
+header#header nav a:hover {
+    text-shadow: #ddd 0px 0px 2px;
+}
+
+header#header nav a.rss {
+    float: right;
+    display: block;
+    width: 36px;
+    height: 36px;
+    background: url('rss.png') 0 0;
+}
+
+header#header nav a.rss:hover {
+    background: url('rss.png') 36px 0;
+}
+
+
+/*---------------------------------------------------------------------------*
+ * ARTICLE SECTION
+ *---------------------------------------------------------------------------*/
+
+.article-wrapper, #comments {
+    width: 730px;
+    float: left;
+    margin-right: 20px;
+}
+
+article {
+    margin-bottom: 80px;
+}
+
+article header {
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+article header time {
+    color: #666;
+    font-size: 14px;
+    display: block;
+}
+
+article header h2 {
+    display: inline;
+    font-size: 24px;;
+    font-weight: normal;
+}
+
+article header h2 a.light {
+    color: #396ea2;
+}
+
+article header h2 a.dark {
+    color: #036;
+}
+
+article header .tags {
+    margin-left: 2px;
+    font-size: 0.8em;
+}
+
+article header .tags a {
+    color: #1e4e1e;
+}
+
+article blockquote {
+    margin: 5px 0px 5px 2px;
+    padding: 1px 30px 1px 15px;
+    border-left: 1px dashed #396ea2;
+    color: #036;
+    font-size: 0.9em;
+}
+
+article .content a {
+    color: #00669a;
+}
+
+article .content a:hover {
+    color: #ff0002;
+}
+
+article .content h2 {
+    display: block;
+    font-size: 22px;
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+article .content h3 {
+    display: block;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+article .content img {
+    max-width: 100%;
+    border: 1px solid #ccc;
+}
+
+article a.readmore {
+    color: #036;
+    float: right;
+}
+
+article p {
+    margin: 10px 0px;
+    line-height: 1.5em;
+}
+
+article .content em {
+    color: #4e1e1e;
+    font-style: normal;
+}
+
+article ul,
+article ol {
+    margin-left: 40px;
+}
+
+article pre code {
+    font-size: 0.9em;
+    margin: 15px 0;
+    padding: 5px;
+    border: 1px dashed #999;
+    background: #fafafa;
+}
+
+article .content img {
+    margin: 0px 10px 10px 0px;
+}
+
+/*---------------------------------------------------------------------------*
+ * ASIDE SECTION
+ *---------------------------------------------------------------------------*/
+
+aside {
+    float: left;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fdfdfd;
+    padding: 5px;
+}
+
+aside .widget {
+    margin-bottom: 20px;
+    display: block;
+}
+
+aside .widget header {
+    padding: 5px;
+    font-size: 16px;
+    font-family: Georgia;
+    text-transform: uppercase;
+}
+
+aside .widget.search input {
+    margin-top: 10px;
+    padding: 5px 5px;
+    border-radius: 3px;
+    width: 186px;
+    border: 1px solid #ccc;
+}
+
+aside .categories ul {
+    list-style: none;
+    border: 1px solid #ccc;
+}
+
+aside .categories ul li a {
+    color: #333;
+    font-size: 14px;
+    padding: 5px 7px;
+    display: block;
+    text-decoration: none;
+}
+
+aside .categories ul li a:hover {
+    background: #396ea2;
+    color: #fcfcfc;
+}
+
+
+aside .friends ul {
+    list-style: none;
+    border: 1px solid #ccc;
+}
+
+aside .friends ul li {
+    font-size: 14px;
+    padding: 5px 7px;
+    display: block;
+}
+
+aside .friends ul li a {
+    color: #333;
+}
+
+aside .online ul {
+    list-style: none;
+    border: 1px solid #ccc;
+}
+
+aside .online ul li a {
+    color: #333;
+    font-size: 14px;
+    padding-left: 20px;
+    height: 16px;
+    margin: 7px 0px 7px 4px;
+    display: block;
+    text-decoration: none;
+}
+
+aside .online ul li a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+
+aside .online ul li a.twitter { background: url('social.png') 0px 0px no-repeat;}
+aside .online ul li a.github { background: url('social.png') 0px -16px no-repeat;}
+aside .online ul li a.lastfm { background: url('social.png') 0px -32px no-repeat;}
+aside .online ul li a.picasa { background: url('social.png') 0px -48px no-repeat;}
+aside .online ul li a.linkedin { background: url('social.png') 0px -64px no-repeat;}
+aside .online ul li a.google { background: url('social.png') 0px -80px no-repeat;}
+
+aside .online ul li a.twitter:hover { background: url('social.png') 0px -96px no-repeat;}
+aside .online ul li a.github:hover { background: url('social.png') 0px -112px no-repeat;}
+aside .online ul li a.lastfm:hover { background: url('social.png') 0px -128px no-repeat;}
+aside .online ul li a.picasa:hover { background: url('social.png') 0px -144px no-repeat;}
+aside .online ul li a.linkedin:hover { background: url('social.png') 0px -160px no-repeat;}
+aside .online ul li a.google:hover { background: url('social.png') 0px -176px no-repeat;}
+
+/*---------------------------------------------------------------------------*
+ * FOOTER SECTION
+ *---------------------------------------------------------------------------*/
+
+.footer-wrapper {
+    clear: both;
+    margin-top: 40px;
+}
+
+footer#footer {
+    border-top: 1px solid #ccc;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    padding-top: 5px;
+    margin-bottom: 30px;
+}
+
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/*---------------------------------------------------------------------------*
+ * PAGINATION SECTION
+ *---------------------------------------------------------------------------*/
+
+.pagination {
+    margin-bottom: 30px;
+}
+
+.pagination a {
+    border: 1px solid #396ea2;
+    padding: 2px 5px;
+    margin: 0px 3px;
+    background: #f0f0ff;
+    color: #396ea2;
+}
+
+
+/*---------------------------------------------------------------------------*
+ * COMMENTS SECTION
+ *---------------------------------------------------------------------------*/
+
+#comments {
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+  margin-bottom: 30px;
+}
+
+#comments .section-title {
+    font-size: 22px;
+    font-family: Georgia;
+    text-transform: uppercase;
+    display: block;
+}
+
+#comments > .comment {
+  padding: 40px 0px;
+  display: block;
+}
+
+#comments > .comment .header {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding: 2px;
+}
+
+#comments > .comment .header time {
+    float: right;
+    font-size: 0.8em;
+}
+
+
+#comments > .comment .header .author-admin {
+    color: #700;
+}
+
+#comments > .comment .header .permalink {
+    float: right;
+    font-size: 0.8em;
+    color: #700;
+    margin-left: 10px;
+}
+
+#comments > .comment .content {
+    margin-left: 60px;
+}
+
+#comments > .comment .content blockquote {
+    padding: 1px 30px 1px 15px;
+    margin: 5px 0px 5px 2px;
+    border-left: 1px dashed #396ea2;
+    color: #036;
+    font-size: 0.9em;
+}
+
+#comments > .comment .content pre code {
+    border: 1px dashed #999;
+    padding: 5px;
+    margin: 3px 2px 3px;
+    color: #1e1e1e;
+    overflow: auto;
+}
+
+#comments > .comment .content ul,
+#comments > .comment .content ol {
+    margin: 5px 0px 5px 25px;
+}
+
+#comments > .comment .content li {
+    margin: 3px 0px;
+}
+
+#comments > .comment .content p {
+    margin: 10px 0px;
+}
+
+#comments > .comment .reply {
+    float: right;
+    font-size: 0.9em;
+    display: block;
+    margin-top: 10px;
+}
+
+#comments #newcomment {
+    margin: 20px auto 0px;
+    width: 500px;
+}
+
+#comments #newcomment input[type="text"] {
+    padding: 3px;
+    width: 300px;
+    margin: 3px 0px;
+    border: 1px solid #ccc;
+}
+
+#comments #newcomment label {
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+#comments #newcomment textarea {
+    width: 600px;
+    padding: 5px;
+    margin: 3px 0px;
+    height: 150px;
+    border: 1px solid #ccc;
+}
+
+#comments #newcomment input[type="submit"] {
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+    background: #eee;
+}
+
+#comments #newcomment input[type="checkbox"] {
+    border: 1px solid #ccc;
+    color: red;
+    padding: 2px;
+}

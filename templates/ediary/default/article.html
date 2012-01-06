@@ -1,0 +1,39 @@
+{% extends "ediary/default/base.html" %}
+
+{% block title %}{{ article.title }} | {{ TITLE }}{% endblock %}
+
+{% block content %}
+  <article>
+    <header>
+      <time datetime="{{ article.published|date:"Y-m-d" }}">{{ article.published|date:"F d, Y" }}</time>
+      <h2>
+        <a class="light" href="{{ article.category.get_absolute_url }}">{{ article.category }}</a>
+          &rarr;
+        <a class="dark" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+      </h2>
+
+      <div class="tags">
+        {% for tag in article.tags %}
+        <a href="{% url ediary-tag tag %}">{{ tag }}</a>
+        {% if not forloop.last %} / {% endif %}
+        {% endfor %}
+      </div>
+    </header>
+
+    <div class="content">
+      {{ article.html|safe }}
+    </div>
+  </article>
+
+  {% load comments %}
+  {% get_comment_count for article as comment_count %}
+  {% get_comment_list for article as comment_list %}
+
+  <section id="comments">
+    <span class="section-title">Комментарии ({{ comment_count }}):</span>
+    {% render_comment_list for article %}
+    {% if article.allow_comments %}
+      {% render_comment_form for article %}
+    {% endif %}
+  </section>
+{% endblock %}

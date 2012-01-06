@@ -1,0 +1,90 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ STATIC_URL }}ediary/styles/{{ STYLE }}/style.css" rel="stylesheet">
+    <link href="{% url ediary-feed %}" rel="alternate" title="{{ TITLE }} feed" type="application/rss+xml">
+
+    <!--[if lte IE 8]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- highlight.js -->
+    <script src="{{ STATIC_URL }}ediary/highlight.js/highlight.pack.js"></script>
+    <script>
+      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad();
+    </script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}ediary/highlight.js/styles/vs.css">
+    <!-- /highlight.js -->
+  </head>
+
+  <body>
+
+    <!-- header -->
+    <div class="header-wrapper">
+    <header id="header">
+      <img class="logo" src="{{ STATIC_URL }}ediary/logo.png" alt="logo">
+      <h1><a href="{% url ediary-index %}">{{ TITLE }}</a></h1>
+      <span class="description">{{ SUBTITLE }}</span>
+
+      <nav>
+        <a class="rss" href="{% url ediary-feed %}"></a>
+        {% for item in navigation_links %}
+        <a href="{{ item.url }}" title="{{ item.description }}">{{ item.title }}</a>
+        {% endfor %}
+      </nav>
+    </header>
+    </div>
+
+    <!-- main section -->
+    <div id="main">
+      <!-- main article -->
+      <div class="article-wrapper">
+      {% block content %}
+      {% endblock %}
+      </div>
+
+      <!-- sidebar -->
+      <aside>
+        {% if categories %}
+        <section class="widget categories">
+          <header>{% trans "Categories" %}</header>
+          <div class="content">
+            <ul>
+              {% for category in categories %}
+              <li><a href="{{ category.get_absolute_url }}">{{ category }}</a>
+              {% endfor %}
+            </ul>
+          </div>
+        </section>
+        {% endif %}
+
+        {% if blogroll_items %}
+        <section class="widget friends">
+          <header>{% trans "Blogroll" %}</header>
+          <div class="content">
+            <ul>
+              {% for item in blogroll_items %}
+              <li><a href="{{ item.url }}" title="{{ item.description }}">{{ item.title }}</a>
+              {% endfor %}
+            </ul>
+          </div>
+        </section>
+        {% endif %}
+      </aside>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-wrapper">
+    <footer id="footer">
+      <span>&copy; {% now "Y" %} <a href="{{ COPYRIGHT_URL }}">{{ COPYRIGHT }}</a></span> <br>
+      Powered by <a href="http://github.com/ikalnitsky/ediary">eDiary</a>
+    </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "ediary/default/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ additional_title }} | {{ TITLE }}{% endblock %}
+
+{% block content %}
+  {% if object_list %}
+    {% for article in object_list %}
+    <article>
+      <header>
+        <time datetime="{{ article.published|date:"Y-m-d" }}">{{ article.published|date:"F d, Y" }}</time>
+        <h2>
+          <a class="light" href="{{ article.category.get_absolute_url }}">{{ article.category }}</a>
+            &rarr;
+          <a class="dark" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </h2>
+
+        <div class="tags">
+          {% for tag in article.tags %}
+          <a href="{% url ediary-tag tag %}">{{ tag }}</a>
+          {% if not forloop.last %} / {% endif %}
+          {% endfor %}
+        </div>
+      </header>
+
+      <div class="content">
+        {{ article.intro|safe }}
+      </div>
+
+      <a class="readmore" href="{{ article.get_absolute_url }}">&gt; {% trans "readmore" %}</a>
+    </article>
+    {% endfor %}
+  {% else %}
+    {% trans "Not found..." %}
+  {% endif %}
+
+  {% if paginator.num_pages > 1 %}
+  <div class="pagination">
+    {% for index in paginator.page_range %}
+    <a href="?page={{ index }}">{{ index }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+{% endblock %}
