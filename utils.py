@@ -1,6 +1,6 @@
 # coding: utf-8
 from django import http
-from ediary import settings
+from ediary import app_settings
 from models import Category, NavigationLink, BlogrollItem
 
 
@@ -15,16 +15,16 @@ def superuser_required(func):
 
 
 def get_template_path(template_name):
-    return 'ediary/{0}/{1}'.format(settings.EDIARY_STYLE, template_name)
+    return 'ediary/{0}/{1}'.format(app_settings.EDIARY_STYLE, template_name)
 
 
 def get_common_context():
     return {
-        'TITLE': settings.EDIARY_TITLE,
-        'SUBTITLE': settings.EDIARY_SUBTITLE,
-        'STYLE': settings.EDIARY_STYLE,
-        'COPYRIGHT': settings.EDIARY_COPYRIGHT,
-        'COPYRIGHT_URL': settings.EDIARY_COPYRIGHT_URL,
+        'TITLE': app_settings.EDIARY_TITLE,
+        'SUBTITLE': app_settings.EDIARY_SUBTITLE,
+        'STYLE': app_settings.EDIARY_STYLE,
+        'COPYRIGHT': app_settings.EDIARY_COPYRIGHT,
+        'COPYRIGHT_URL': app_settings.EDIARY_COPYRIGHT_URL,
 
         'categories': Category.objects.all(),
         'navigation_links': NavigationLink.objects.all(),

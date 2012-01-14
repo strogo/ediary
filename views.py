@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.views.generic.list_detail import object_list
 
 from utils import superuser_required, get_template_path, get_common_context
-from ediary import settings
+from ediary import app_settings
 from models import Article, Category
 
 
@@ -13,7 +13,7 @@ def index(request):
         request,
         template_name=get_template_path('index.html'),
         queryset=Article.public.all(),
-        paginate_by=settings.EDIARY_PAGINATEBY,
+        paginate_by=app_settings.EDIARY_PAGINATEBY,
         extra_context=get_common_context(),
     )
 
@@ -39,7 +39,7 @@ def category(request, slug):
         request,
         template_name=get_template_path('list.html'),
         queryset=Article.public.filter(category=category),
-        paginate_by=settings.EDIARY_PAGINATEBY,
+        paginate_by=app_settings.EDIARY_PAGINATEBY,
         extra_context=dict(get_common_context(), **{'additional_title': slug}),
     )
 
@@ -49,6 +49,6 @@ def tag(request, slug):
         request,
         template_name=get_template_path('list.html'),
         queryset=Article.public.filter(tagline__icontains=slug),
-        paginate_by=settings.EDIARY_PAGINATEBY,
+        paginate_by=app_settings.EDIARY_PAGINATEBY,
         extra_context=dict(get_common_context(), **{'additional_title': slug}),
     )

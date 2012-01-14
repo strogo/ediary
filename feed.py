@@ -4,17 +4,17 @@ from django.http import HttpResponseRedirect
 from django.db import models
 
 from models import Article
-from ediary import settings
+from ediary import app_settings
 
 
 class RssArticleFeed(Feed):
-    title = settings.EDIARY_TITLE
-    description = settings.EDIARY_SUBTITLE
+    title = app_settings.EDIARY_TITLE
+    description = app_settings.EDIARY_SUBTITLE
 
-    author_name = settings.EDIARY_AUTHOR_NAME
-    author_link = settings.EDIARY_AUTHOR_URL
-    author_email = settings.EDIARY_AUTHOR_EMAIL
-    feed_copyright = settings.EDIARY_AUTHOR_COPYRIGHT
+    author_name = app_settings.EDIARY_AUTHOR_NAME
+    author_link = app_settings.EDIARY_AUTHOR_URL
+    author_email = app_settings.EDIARY_AUTHOR_EMAIL
+    feed_copyright = app_settings.EDIARY_AUTHOR_COPYRIGHT
 
     @models.permalink
     def link(self):
@@ -37,7 +37,7 @@ class RssArticleFeed(Feed):
 
 
 def handler(request):
-    if settings.EDIARY_FEEDBURNER == '' or \
+    if app_settings.EDIARY_FEEDBURNER == '' or \
         request.META['HTTP_USER_AGENT'].startswith('FeedBurner'):
             return RssArticleFeed()(request)
-    return HttpResponseRedirect(settings.EDIARY_FEEDBURNER)
+    return HttpResponseRedirect(app_settings.EDIARY_FEEDBURNER)
