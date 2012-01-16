@@ -25,12 +25,12 @@
     </div>
   </article>
 
-  {% load comments %}
+  {% load i18n comments %}
   {% get_comment_count for article as comment_count %}
   {% get_comment_list for article as comment_list %}
 
   <section id="comments">
-    <span class="section-title">Комментарии ({{ comment_count }}):</span>
+  <span class="section-title">{% trans "Comments" %} ({{ comment_count }}):</span>
     {% render_comment_list for article %}
     {% if article.allow_comments %}
       {% render_comment_form for article %}

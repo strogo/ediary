@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.conf.urls.defaults import patterns, url, include
+from django.conf.urls.defaults import patterns, url
 
 
 urlpatterns = patterns('ediary',
@@ -10,5 +10,4 @@ urlpatterns = patterns('ediary',
     url(r'^category/([^/]+)', 'views.category', name='ediary-category'),
     url(r'^tag/([^/]+)', 'views.tag', name='ediary-tag'),
     url(r'^feed', 'feed.handler', name='ediary-feed'),
-    url(r'^comments', include('django.contrib.comments.urls')),
 )
