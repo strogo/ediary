@@ -46,10 +46,10 @@ class Article(models.Model):
     def get_absolute_url(self):
         if self.published:
             return ('ediary-article', [
-                '%04d' % self.published.year,
-                '%02d' % self.published.month,
-                '%02d' % self.published.day,
-                '%s' % self.slug
+                '{:04d}'.format(self.published.year),
+                '{:02d}'.format(self.published.month),
+                '{:02d}'.format(self.published.day),
+                self.slug
             ])
         return ('ediary-draft', [str(self.pk)])
 
