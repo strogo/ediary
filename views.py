@@ -28,9 +28,11 @@ def article(request, year, month, day, slug):
 
 @superuser_required
 def draft(request, pk):
-    return render_to_response(request, 'article.html', {
-        'article': get_object_or_404(Article, pk=pk),
-    })
+    return render_to_response(
+        get_template_path('article.html'),
+        {'article': get_object_or_404(Article, pk=pk)},
+        context_instance=RequestContext(request, get_common_context())
+    )
 
 
 def category(request, slug):
