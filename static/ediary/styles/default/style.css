@@ -123,6 +123,20 @@ header#header nav a.rss:hover {
     background: url('rss.png') 36px 0;
 }
 
+header#header .available_languages {
+    position: absolute;
+    top: -1px;
+    left: 700px;
+    padding: 0px 7px 4px;
+    border: 1px solid #888;
+    border-radius: 0px 0px 4px 4px;
+}
+
+header#header .available_languages a {
+    font-size: 0.8em;
+    color: #cccccc;
+    padding: 0px 7px;
+}
 
 /*---------------------------------------------------------------------------*
  * ARTICLE SECTION
@@ -171,6 +185,20 @@ article header .tags {
 
 article header .tags a {
     color: #1e4e1e;
+}
+
+article header .other_languages {
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+    padding-top: 5px;
+    margin-left: 2px;
+    font-size: 0.8em;
+    color: #666;
+}
+
+article header .other_languages a {
+    color: #777;
+    border-bottom: 1px dashed #777;
 }
 
 article blockquote {

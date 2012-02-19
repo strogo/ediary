@@ -1,5 +1,6 @@
 {% extends "ediary/default/base.html" %}
 {% load i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
 
 {% block title %}{{ additional_title }} | {{ TITLE }}{% endblock %}
 
@@ -10,15 +11,19 @@
       <header>
         <time datetime="{{ article.published|date:"Y-m-d" }}">{{ article.published|date:"F d, Y" }}</time>
         <h2>
-          <a class="light" href="{{ article.category.get_absolute_url }}">{{ article.category }}</a>
+          <a class="light" href="{{ article.category.get_absolute_url }}">{{ article.category.title }}</a>
             &rarr;
           <a class="dark" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
         </h2>
 
         <div class="tags">
           {% for tag in article.tags %}
-          <a href="{% url ediary-tag tag %}">{{ tag }}</a>
-          {% if not forloop.last %} / {% endif %}
+            {% if CURRENT_LANGUAGE = DEFAULT_LANGUAGE %}
+                <a href="{% url ediary-tag tag %}">{{ tag }}</a>
+            {% else %}
+                <a href="{% url ediary-tag tag CURRENT_LANGUAGE %}">{{ tag }}</a>
+            {% endif %}
+            {% if not forloop.last %} / {% endif %}
           {% endfor %}
         </div>
       </header>

@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.contrib.syndication.views import Feed
-from django.http import HttpResponseRedirect
 from django.db import models
+from django.utils import translation
 
 from models import Article
 from ediary import app_settings
@@ -21,7 +21,7 @@ class RssArticleFeed(Feed):
         return ('ediary-feed', [])
 
     def items(self):
-        return Article.public.all()[:10]
+        return Article.public.language(translation.get_language())[:10]
 
     def item_link(self, item):
         return item.get_absolute_url()
@@ -36,8 +36,7 @@ class RssArticleFeed(Feed):
         return item.published
 
 
-def handler(request):
-    if app_settings.EDIARY_FEEDBURNER == '' or \
-        request.META['HTTP_USER_AGENT'].startswith('FeedBurner'):
-            return RssArticleFeed()(request)
-    return HttpResponseRedirect(app_settings.EDIARY_FEEDBURNER)
+def handler(request, language=None):
+    language = language or app_settings.EDIARY_DEFAULT_LANGUAGE
+    translation.activate(language)
+    return RssArticleFeed()(request)

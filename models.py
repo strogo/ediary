@@ -1,57 +1,82 @@
 # coding: utf-8
 from django.db import models
+from nani.models import TranslatableModel, TranslationManager, TranslatedFields
+from django.utils import translation
+from django.utils.translation import ugettext as _
 from markdown2 import markdown
 
+from ediary import app_settings
 
-class Category(models.Model):
+
+class Category(TranslatableModel):
     slug = models.SlugField(max_length=200, unique=True)
-    title = models.CharField(max_length=255, blank=True)
-    description = models.TextField(blank=True)
+
+    translations = TranslatedFields(
+        title = models.CharField(max_length=255, blank=True),
+        description = models.TextField(blank=True),
+    )
 
     class Meta:
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
 
     def __unicode__(self):
-        return self.title
+        return self.safe_translation_getter('title', self.slug)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('ediary-category', [self.slug])
+        args = [self.slug, ]
+        language = translation.get_language()
+        if language != app_settings.EDIARY_DEFAULT_LANGUAGE:
+            args.append(language)
+        return ('ediary-category', args)
 
 
-class PublicArticlesManager(models.Manager):
+class PublicArticlesManager(TranslationManager):
     def get_query_set(self):
         qs = super(self.__class__, self).get_query_set()
-        return qs.exclude(published=None).order_by('-published')
+        return qs.exclude(published=None)
+
+    def language(self, language=None):
+        return super(self.__class__, self).language(language).order_by('-published')
 
 
-class Article(models.Model):
+class Article(TranslatableModel):
     slug = models.SlugField(max_length=200, unique=True)
-    title = models.CharField(max_length=255, blank=True)
-    text = models.TextField(blank=True)
+
+    translations = TranslatedFields(
+        title = models.CharField(max_length=255, blank=True),
+        text = models.TextField(blank=True),
+    )
+
     tagline = models.CharField(max_length=255, blank=True)
     category = models.ForeignKey(Category)
     published = models.DateTimeField(blank=True, null=True, db_index=True)
     updated = models.DateTimeField(auto_now=True)
     allow_comments = models.BooleanField(blank=True, default=True)
 
-    objects = models.Manager()
+    objects = TranslationManager()
     public = PublicArticlesManager()
 
     def __unicode__(self):
-        return self.title
+        return self.safe_translation_getter('title', self.slug)
 
     @models.permalink
     def get_absolute_url(self):
+        args = [
+            '{:04d}'.format(self.published.year),
+            '{:02d}'.format(self.published.month),
+            '{:02d}'.format(self.published.day),
+            self.slug,
+        ]
+
+        language = translation.get_language()
+        if language != app_settings.EDIARY_DEFAULT_LANGUAGE:
+            args.append(language)
+
         if self.published:
-            return ('ediary-article', [
-                '{:04d}'.format(self.published.year),
-                '{:02d}'.format(self.published.month),
-                '{:02d}'.format(self.published.day),
-                self.slug
-            ])
-        return ('ediary-draft', [str(self.pk)])
+            return ('ediary-article', args)
+        return ('ediary-draft', [str(self.pk), language])
 
     def html(self):
         return markdown(self.text, True, extras=['code-color'])
@@ -70,19 +95,14 @@ class Article(models.Model):
             return self.html()[:300]
 
 
-class NavigationLink(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, blank=True)
+class NavigationLink(TranslatableModel):
     url = models.URLField()
 
-    def __unicode__(self):
-        return self.title
-
-
-class BlogrollItem(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, blank=True)
-    url = models.URLField()
+    translations = TranslatedFields(
+        title = models.CharField(max_length=255),
+        description = models.CharField(max_length=255, blank=True),
+    )
 
     def __unicode__(self):
-        return self.title
+        return self.safe_translation_getter('title', self.url)
+

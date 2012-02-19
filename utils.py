@@ -1,7 +1,7 @@
 # coding: utf-8
 from django import http
 from ediary import app_settings
-from models import Category, NavigationLink, BlogrollItem
+from models import Category, NavigationLink
 
 
 def superuser_required(func):
@@ -25,8 +25,8 @@ def get_common_context():
         'STYLE': app_settings.EDIARY_STYLE,
         'COPYRIGHT': app_settings.EDIARY_COPYRIGHT,
         'COPYRIGHT_URL': app_settings.EDIARY_COPYRIGHT_URL,
+        'DEFAULT_LANGUAGE': app_settings.EDIARY_DEFAULT_LANGUAGE,
 
         'categories': Category.objects.all(),
         'navigation_links': NavigationLink.objects.all(),
-        'blogroll_items': BlogrollItem.objects.all(),
     }

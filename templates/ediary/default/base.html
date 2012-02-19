@@ -1,4 +1,18 @@
 {% load i18n %}
+
+{# create internatialize links #}
+{% get_current_language as CURRENT_LANGUAGE %}
+{% get_available_languages as LANGUAGES %}
+
+{% url ediary-index CURRENT_LANGUAGE as BLOGURL %}
+{% url ediary-feed CURRENT_LANGUAGE as FEEDURL %}
+
+{% if CURRENT_LANGUAGE = DEFAULT_LANGUAGE %}
+    {% url ediary-index as BLOGURL %}
+    {% url ediary-feed as FEEDURL %}
+{% endif %}
+{# /create internatialize links #}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +21,7 @@
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="{{ STATIC_URL }}ediary/styles/{{ STYLE }}/style.css" rel="stylesheet">
-    <link href="{% url ediary-feed %}" rel="alternate" title="{{ TITLE }} feed" type="application/rss+xml">
+    <link href="{{ FEEDURL }}" rel="alternate" title="{{ TITLE }} feed" type="application/rss+xml">
 
     <!--[if lte IE 8]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,15 +43,26 @@
     <div class="header-wrapper">
     <header id="header">
       <img class="logo" src="{{ STATIC_URL }}ediary/logo.png" alt="logo">
-      <h1><a href="{% url ediary-index %}">{{ TITLE }}</a></h1>
+      <h1><a href="{{ BLOGURL }}">{{ TITLE }}</a></h1>
       <span class="description">{{ SUBTITLE }}</span>
 
       <nav>
-        <a class="rss" href="{% url ediary-feed %}"></a>
+        <a class="rss" href="{{ FEEDURL }}"></a>
         {% for item in navigation_links %}
         <a href="{{ item.url }}" title="{{ item.description }}">{{ item.title }}</a>
         {% endfor %}
       </nav>
+
+      <div class="available_languages">
+        {% for code, name in LANGUAGES %}
+        {% if code = DEFAULT_LANGUAGE %}
+        <a href="{% url ediary-index %}">{{ name }}</a>
+        {% else %}
+        <a href="{% url ediary-index code %}">{{ name }}</a>
+        {% endif %}
+        {% endfor %}
+      </div>
+
     </header>
     </div>
 
@@ -57,20 +82,7 @@
           <div class="content">
             <ul>
               {% for category in categories %}
-              <li><a href="{{ category.get_absolute_url }}">{{ category }}</a>
-              {% endfor %}
-            </ul>
-          </div>
-        </section>
-        {% endif %}
-
-        {% if blogroll_items %}
-        <section class="widget friends">
-          <header>{% trans "Blogroll" %}</header>
-          <div class="content">
-            <ul>
-              {% for item in blogroll_items %}
-              <li><a href="{{ item.url }}" title="{{ item.description }}">{{ item.title }}</a>
+              <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
               {% endfor %}
             </ul>
           </div>

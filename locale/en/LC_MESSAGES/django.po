@@ -1,0 +1,44 @@
+# eDiary Translation File
+# Copyright (C) 2012 eDiary
+# This file is distributed under the same license as the eDiary.
+# Igor Kalnitsky <igor@kalnitsky.org>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-19 20:59+0200\n"
+"PO-Revision-Date: 2012-02-19 20:59+-200\n"
+"Last-Translator: Igor Kalnitsky <igor@kalnitsky.org>\n"
+"Language-Team: English\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:20
+msgid "category"
+msgstr "category"
+
+#: models.py:21
+msgid "categories"
+msgstr "categories"
+
+#: templates/ediary/default/article.html:31
+msgid "Other languages: "
+msgstr "Other languages: "
+
+#: templates/ediary/default/article.html:52
+msgid "Comments"
+msgstr "Comments"
+
+#: templates/ediary/default/base.html:81
+msgid "Categories"
+msgstr "Categories"
+
+#: templates/ediary/default/list.html:35
+msgid "readmore"
+msgstr "readmore"
+
+#: templates/ediary/default/list.html:39
+msgid "Not found..."
+msgstr "Not found..."
