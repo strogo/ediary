@@ -1,5 +1,6 @@
 {% extends "ediary/default/base.html" %}
 {% load i18n %}
+{% load markup %}
 {% get_current_language as CURRENT_LANGUAGE %}
 
 {% block title %}{{ additional_title }} | {{ TITLE }}{% endblock %}
@@ -29,7 +30,7 @@
       </header>
 
       <div class="content">
-        {{ article.intro|safe }}
+        {{ article.intro|restructuredtext }}
       </div>
 
       <a class="readmore" href="{{ article.get_absolute_url }}">&gt; {% trans "readmore" %}</a>

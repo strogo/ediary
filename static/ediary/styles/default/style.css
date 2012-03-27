@@ -1,4 +1,6 @@
 @charset 'utf-8';
+@import url('pygments/vs.css');
+
 
 :focus {
     outline: 0;
@@ -14,7 +16,7 @@
 }
 
 body {
-    font-family: Verdana, Tahoma, Arial, 'Times New Roman';
+    font-family:  Verdana, sans-serif, Tahoma, Arial, 'Times New Roman';
     background: #f8f8f8 url('background-light.png');
     font-size: 14px;
     color: #222222;
@@ -68,7 +70,6 @@ header#header h1 {
     padding-top: 13px;
     margin-left: 70px;
     font-size: 24px;
-    font-family: Verdana, Tahoma, Georgia, Arial;
     font-weight: normal;
 }
 
@@ -217,14 +218,14 @@ article .content a:hover {
     color: #ff0002;
 }
 
-article .content h2 {
+article .content h1 {
     display: block;
     font-size: 22px;
     font-weight: normal;
     margin-top: 40px;
 }
 
-article .content h3 {
+article .content h2 {
     display: block;
     font-size: 19px;
     font-weight: normal;
@@ -256,7 +257,7 @@ article ol {
     margin-left: 40px;
 }
 
-article pre code {
+article pre.code {
     font-size: 0.9em;
     margin: 15px 0;
     padding: 5px;

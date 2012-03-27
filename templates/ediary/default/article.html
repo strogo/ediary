@@ -1,5 +1,6 @@
 {% extends "ediary/default/base.html" %}
 {% load i18n %}
+{% load markup %}
 {% load translation_filters %}
 {% get_current_language as CURRENT_LANGUAGE %}
 
@@ -40,7 +41,7 @@
     </header>
 
     <div class="content">
-      {{ article.html|safe }}
+      {{ article.text|restructuredtext }}
     </div>
   </article>
 

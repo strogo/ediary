@@ -3,7 +3,6 @@ from django.db import models
 from nani.models import TranslatableModel, TranslationManager, TranslatedFields
 from django.utils import translation
 from django.utils.translation import ugettext as _
-from markdown2 import markdown
 
 from ediary import app_settings
 
@@ -78,21 +77,19 @@ class Article(TranslatableModel):
             return ('ediary-article', args)
         return ('ediary-draft', [str(self.pk), language])
 
-    def html(self):
-        return markdown(self.text, True, extras=['code-color'])
 
     def tags(self):
         return [tag.lstrip() for tag in self.tagline.split(',')]
 
     def intro(self):
         import re
-        pattern = re.compile(r'(.*)<!-- readmore -->.*', re.S)
-        intro = re.match(pattern, self.html())
+        pattern = re.compile(r'(.*)..\s+readmore.*', re.S)
+        intro = re.match(pattern, self.text)
         if intro:
             print intro.groups
             return intro.groups(0)[0]
         else:
-            return self.html()[:300]
+            return self.text[:300]
 
 
 class NavigationLink(TranslatableModel):
