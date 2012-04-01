@@ -1,6 +1,6 @@
 {% extends "ediary/default/base.html" %}
-{% load i18n %}
-{% load markup %}
+
+{% load i18n markup %}
 {% get_current_language as CURRENT_LANGUAGE %}
 
 {% block title %}{{ additional_title }} | {{ TITLE }}{% endblock %}
@@ -19,7 +19,7 @@
 
         <div class="tags">
           {% for tag in article.tags %}
-            {% if CURRENT_LANGUAGE = DEFAULT_LANGUAGE %}
+            {% if CURRENT_LANGUAGE == DEFAULT_LANGUAGE %}
                 <a href="{% url ediary-tag tag %}">{{ tag }}</a>
             {% else %}
                 <a href="{% url ediary-tag tag CURRENT_LANGUAGE %}">{{ tag }}</a>

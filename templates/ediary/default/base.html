@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 
 {# create internatialize links #}
 {% get_current_language as CURRENT_LANGUAGE %}
@@ -20,21 +20,12 @@
     <title>{% block title %}{% endblock %}</title>
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link href="{{ STATIC_URL }}ediary/styles/{{ STYLE }}/style.css" rel="stylesheet">
+    <link href="{% static 'ediary/styles/'|add:STYLE|add:'/style.css' %}" rel="stylesheet">
     <link href="{{ FEEDURL }}" rel="alternate" title="{{ TITLE }} feed" type="application/rss+xml">
 
     <!--[if lte IE 8]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <!-- highlight.js -->
-    <script src="{{ STATIC_URL }}ediary/highlight.js/highlight.pack.js"></script>
-    <script>
-      hljs.tabReplace = '    ';
-      hljs.initHighlightingOnLoad();
-    </script>
-    <link rel="stylesheet" href="{{ STATIC_URL }}ediary/highlight.js/styles/vs.css">
-    <!-- /highlight.js -->
   </head>
 
   <body>
@@ -42,7 +33,7 @@
     <!-- header -->
     <div class="header-wrapper">
     <header id="header">
-      <img class="logo" src="{{ STATIC_URL }}ediary/logo.png" alt="logo">
+      <img class="logo" src="{% static 'ediary/logo.png' %}" alt="logo">
       <h1><a href="{{ BLOGURL }}">{{ TITLE }}</a></h1>
       <span class="description">{{ SUBTITLE }}</span>
 
@@ -55,7 +46,7 @@
 
       <div class="available_languages">
         {% for code, name in LANGUAGES %}
-        {% if code = DEFAULT_LANGUAGE %}
+        {% if code == DEFAULT_LANGUAGE %}
         <a href="{% url ediary-index %}">{{ name }}</a>
         {% else %}
         <a href="{% url ediary-index code %}">{{ name }}</a>
@@ -94,7 +85,7 @@
     <!-- footer -->
     <div class="footer-wrapper">
     <footer id="footer">
-      <span>&copy; 2010 - {% now "Y" %} <a href="{{ COPYRIGHT_URL }}">{{ COPYRIGHT }}</a></span> <br>
+    <span>&copy; {{ COPYRIGHT_YEAR }} <a href="{{ COPYRIGHT_URL }}">{{ COPYRIGHT }}</a></span> <br>
       Powered by <a href="http://github.com/ikalnitsky/ediary">eDiary</a>
     </footer>
     </div>

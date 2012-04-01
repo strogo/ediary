@@ -1,7 +1,6 @@
 {% extends "ediary/default/base.html" %}
-{% load i18n %}
-{% load markup %}
-{% load translation_filters %}
+
+{% load i18n markup %}
 {% get_current_language as CURRENT_LANGUAGE %}
 
 {% block title %}{{ article.title }} | {{ TITLE }}{% endblock %}
@@ -32,7 +31,15 @@
         {% trans "Other languages: " %}
         {% for language in article.get_available_languages %}
           {% if language != CURRENT_LANGUAGE %}
-            <a href="{{ article|url_for_language:language }}">{{ language|language_name }}</a>
+            {% with article.published as p %}
+              {% if language == DEFAULT_LANGUAGE %}
+                {% url ediary-article p|date:'Y' p|date:'m' p|date:'d' article.slug as article_url %}
+              {% else %}
+                {% url ediary-article p|date:'Y' p|date:'m' p|date:'d' article.slug language as article_url %}
+              {% endif %}
+            {% get_language_info for language as language_info %}
+            <a href="{{ article_url }}">{{ language_info.name_local }}</a>
+            {% endwith %}
           {% endif %}
         {% endfor %}
       </div>
@@ -45,7 +52,7 @@
     </div>
   </article>
 
-  {% load i18n comments %}
+  {% load comments %}
   {% get_comment_count for article as comment_count %}
   {% get_comment_list for article as comment_list %}
 
