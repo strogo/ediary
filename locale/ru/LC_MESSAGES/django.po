@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 20:59+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2012-04-01 19:36+0300\n"
+"PO-Revision-Date: 2012-04-01 19:37+02\n"
 "Last-Translator: Igor Kalnitsky <igor@kalnitsky.org>\n"
 "Language-Team: Russian\n"
 "Language: Russian\n"
@@ -17,32 +17,76 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: models.py:20
+#: models.py:32 models.py:72
+msgid "Slug"
+msgstr "URI"
+
+#: models.py:36 models.py:76 models.py:135
+msgid "Title"
+msgstr "Заголовок"
+
+#: models.py:38 models.py:137
+msgid "Description"
+msgstr "Описание"
+
+#: models.py:42 models.py:82
 #, fuzzy
-msgid "category"
+msgid "Category"
 msgstr "Категория"
 
-#: models.py:21
-#, fuzzy
-msgid "categories"
+#: models.py:43 templates/ediary/default/base.html:72
+msgid "Categories"
 msgstr "Категории"
+
+#: models.py:77
+msgid "Text"
+msgstr "Текст"
+
+#: models.py:81
+msgid "Tags"
+msgstr "Теги"
+
+#: models.py:84
+msgid "Published"
+msgstr "Опубликовано"
+
+#: models.py:85
+msgid "Updated"
+msgstr "Обновлено"
+
+#: models.py:87
+#, fuzzy
+msgid "Allow comments"
+msgstr "Комментарии"
+
+#: models.py:93
+msgid "Article"
+msgstr "Статья"
+
+#: models.py:94
+msgid "Articles"
+msgstr "Статьи"
+
+#: models.py:131
+msgid "URL"
+msgstr "URL"
 
 #: templates/ediary/default/article.html:31
 msgid "Other languages: "
 msgstr "На других языках: "
 
-#: templates/ediary/default/article.html:52
+#: templates/ediary/default/article.html:60
 msgid "Comments"
 msgstr "Комментарии"
 
-#: templates/ediary/default/base.html:81
-msgid "Categories"
-msgstr "Категории"
-
-#: templates/ediary/default/list.html:35
+#: templates/ediary/default/list.html:36
 msgid "readmore"
 msgstr "читать далее"
 
-#: templates/ediary/default/list.html:39
+#: templates/ediary/default/list.html:40
 msgid "Not found..."
 msgstr "Не найдено..."
+
+#, fuzzy
+#~ msgid "categories"
+#~ msgstr "Категории"

@@ -26,6 +26,8 @@ from django.db import models
 from django.utils import translation
 from django.utils.translation import ugettext as _
 
+import re
+
 
 class Category(TranslatableModel):
     slug = models.SlugField(max_length=255, unique=True,
@@ -117,14 +119,9 @@ class Article(TranslatableModel):
         return [tag.lstrip() for tag in self.tagline.split(',')]
 
     def intro(self):
-        import re
         pattern = re.compile(r'(.*)..\s+readmore.*', re.S)
         intro = re.match(pattern, self.text)
-        if intro:
-            print intro.groups
-            return intro.groups(0)[0]
-        else:
-            return self.text[:300]
+        return intro.groups(0)[0] if intro else self.text[:300]
 
 
 class NavigationLink(TranslatableModel):

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 20:59+0200\n"
+"POT-Creation-Date: 2012-04-01 19:36+0300\n"
 "PO-Revision-Date: 2012-02-19 20:59+-200\n"
 "Last-Translator: Igor Kalnitsky <igor@kalnitsky.org>\n"
 "Language-Team: English\n"
@@ -15,30 +15,75 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:20
-msgid "category"
-msgstr "category"
+#: models.py:32 models.py:72
+msgid "Slug"
+msgstr "Slug"
 
-#: models.py:21
-msgid "categories"
-msgstr "categories"
+#: models.py:36 models.py:76 models.py:135
+msgid "Title"
+msgstr "Title"
+
+#: models.py:38 models.py:137
+msgid "Description"
+msgstr "Description"
+
+#: models.py:42 models.py:82
+#, fuzzy
+msgid "Category"
+msgstr "Category"
+
+#: models.py:43 templates/ediary/default/base.html:72
+msgid "Categories"
+msgstr "Categories"
+
+#: models.py:77
+msgid "Text"
+msgstr "Text"
+
+#: models.py:81
+msgid "Tags"
+msgstr "Tags"
+
+#: models.py:84
+msgid "Published"
+msgstr "Published"
+
+#: models.py:85
+msgid "Updated"
+msgstr "Updated"
+
+#: models.py:87
+#, fuzzy
+msgid "Allow comments"
+msgstr "Allow comments"
+
+#: models.py:93
+msgid "Article"
+msgstr "Article"
+
+#: models.py:94
+msgid "Articles"
+msgstr "Articles"
+
+#: models.py:131
+msgid "URL"
+msgstr "URL"
 
 #: templates/ediary/default/article.html:31
 msgid "Other languages: "
 msgstr "Other languages: "
 
-#: templates/ediary/default/article.html:52
+#: templates/ediary/default/article.html:60
 msgid "Comments"
 msgstr "Comments"
 
-#: templates/ediary/default/base.html:81
-msgid "Categories"
-msgstr "Categories"
-
-#: templates/ediary/default/list.html:35
+#: templates/ediary/default/list.html:36
 msgid "readmore"
 msgstr "readmore"
 
-#: templates/ediary/default/list.html:39
+#: templates/ediary/default/list.html:40
 msgid "Not found..."
 msgstr "Not found..."
+
+#~ msgid "categories"
+#~ msgstr "categories"
