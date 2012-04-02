@@ -7,7 +7,7 @@
 
 {% block content %}
   {% if object_list %}
-    {% for article in object_list %}
+    {% for article in article_list %}
     <article>
       <header>
         <time datetime="{{ article.published|date:"Y-m-d" }}">{{ article.published|date:"F d, Y" }}</time>

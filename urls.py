@@ -18,26 +18,36 @@
   along with eDiary.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import views, feed
+import feed
+from views import ShowIndex, ShowArticle, ShowDraft, ShowCategory, ShowTag
 
 from django.conf.urls.defaults import patterns, url
 from django.conf import settings
 
 
 LANG_PATTERN = '|'.join([lang[0] for lang in settings.LANGUAGES])
-LANG_PATTERN = '(?:({})/)?'.format(LANG_PATTERN)
+LANG_PATTERN = '(?:(?P<language>{})/)?'.format(LANG_PATTERN)
 
 
 urlpatterns = patterns('',
-    url(r'^{}$'.format(LANG_PATTERN), views.index, name='ediary-index'),
-    url(r'^(\d{4})/(\d{2})/(\d{2})/([^/]+)/' + '{}$'.format(LANG_PATTERN),
-        views.article, name='ediary-article'),
-    url(r'^draft/(\d+)/{}$'.format(LANG_PATTERN), views.draft,
+    # index page
+    url(r'^{}$'.format(LANG_PATTERN), ShowIndex.as_view(),
+        name='ediary-index'),
+
+    # article
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[^/]+)/'
+        + '{}$'.format(LANG_PATTERN), ShowArticle.as_view(),
+        name='ediary-article'),
+    url(r'^draft/(?P<id>\d+)/{}$'.format(LANG_PATTERN), ShowDraft.as_view(),
         name='ediary-draft'),
-    url(r'^category/([^/]+)/{}$'.format(LANG_PATTERN), views.category,
-        name='ediary-category'),
-    url(r'^tag/([^/]+)/{}$'.format(LANG_PATTERN), views.tag,
-        name='ediary-tag'),
+
+    # category and tag
+    url(r'^category/(?P<category>[^/]+)/{}$'.format(LANG_PATTERN),
+        ShowCategory.as_view(), name='ediary-category'),
+    url(r'^tag/(?P<tag>[^/]+)/{}$'.format(LANG_PATTERN),
+        ShowTag.as_view(), name='ediary-tag'),
+
+    # feed
     url(r'^feed/{}$'.format(LANG_PATTERN), feed.handler,
         name='ediary-feed'),
 )

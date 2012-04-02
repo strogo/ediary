@@ -20,70 +20,84 @@
 
 import app_settings
 from models import Article, Category
-from utils import superuser_required, get_template_path, get_common_context
+from utils import get_template_path, get_common_context
 
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
-from django.views.generic.list_detail import object_list
+from django.views.generic import ListView, DetailView
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.utils import translation
+from django.utils.decorators import method_decorator
 
 
-def index(request, language=None):
-    language = language or app_settings.EDIARY_DEFAULT_LANGUAGE
-    translation.activate(language)
-    articles = Article.public.language(language).all()
-    return object_list(
-        request,
-        template_name=get_template_path('index.html'),
-        queryset=articles.prefetch_related('category'),
-        paginate_by=app_settings.EDIARY_PAGINATEBY,
-        extra_context=get_common_context(),
-    )
+class ArticlesList(ListView):
+    ''' Show all available articles '''
+    template_name = get_template_path('list.html')
+    paginate_by = app_settings.EDIARY_PAGINATEBY
+    context_object_name = 'article_list'
+    allow_empty = False
+
+    def get_queryset(self):
+        lang = self.kwargs['language'] or app_settings.EDIARY_DEFAULT_LANGUAGE
+        translation.activate(lang)
+        qs = Article.public.language(lang).prefetch_related('category')
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticlesList, self).get_context_data(**kwargs)
+        return dict(context, **get_common_context())
 
 
-def article(request, year, month, day, slug, language=None):
-    language = language or app_settings.EDIARY_DEFAULT_LANGUAGE
-    translation.activate(language)
-    return render_to_response(
-        get_template_path('article.html'),
-        {'article': get_object_or_404(Article, slug=slug)},
-        context_instance=RequestContext(request, get_common_context())
-    )
+class ShowIndex(ArticlesList):
+    ''' Show main page '''
+    template_name = get_template_path('index.html')
 
 
-@superuser_required
-def draft(request, pk, language=None):
-    language = language or app_settings.EDIARY_DEFAULT_LANGUAGE
-    translation.activate(language)
-    return render_to_response(
-        get_template_path('article.html'),
-        {'article': get_object_or_404(Article, pk=pk)},
-        context_instance=RequestContext(request, get_common_context())
-    )
+class ShowCategory(ArticlesList):
+    ''' Show articles from category '''
+
+    def get_queryset(self):
+        category = get_object_or_404(Category, slug=self.kwargs['category'])
+        qs = super(self.__class__, self).get_queryset()
+        return qs.filter(category=category)
+
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context['additional_title'] = self.kwargs['category']
+        return context
 
 
-def category(request, slug, language=None):
-    language = language or app_settings.EDIARY_DEFAULT_LANGUAGE
-    translation.activate(language)
-    category = get_object_or_404(Category, slug=slug)
-    articles = Article.public.language(language).filter(category=category)
-    return object_list(
-        request,
-        template_name=get_template_path('list.html'),
-        queryset=articles.prefetch_related('category'),
-        paginate_by=app_settings.EDIARY_PAGINATEBY,
-        extra_context=dict(get_common_context(), **{'additional_title': slug}),
-    )
+class ShowTag(ArticlesList):
+    ''' Show articles with tag '''
+
+    def get_queryset(self):
+        qs = super(self.__class__, self).get_queryset()
+        return qs.filter(tagline__icontains=self.kwargs['tag'])
+
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context['additional_title'] = self.kwargs['tag']
+        return context
 
 
-def tag(request, slug, language="None"):
-    language = language or app_settings.EDIARY_DEFAULT_LANGUAGE
-    translation.activate(language)
-    articles = Article.public.language(language).filter(tagline__icontains=slug)
-    return object_list(
-        request,
-        template_name=get_template_path('list.html'),
-        queryset=articles.prefetch_related('category'),
-        paginate_by=app_settings.EDIARY_PAGINATEBY,
-        extra_context=dict(get_common_context(), **{'additional_title': slug}),
-    )
+class ShowArticle(DetailView):
+    ''' Show article '''
+    template_name = get_template_path('article.html')
+    context_object_name = 'article'
+    model = Article
+
+    def get_object(self):
+        lang = self.kwargs['language'] or app_settings.EDIARY_DEFAULT_LANGUAGE
+        translation.activate(lang)
+        return super(ShowArticle, self).get_object()
+
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context = dict(context, **get_common_context())
+        return context
+
+
+class ShowDraft(ShowArticle):
+    ''' Show darft. Protect from guests. '''
+    @method_decorator(login_required())
+    def dispatch(self, request, *args, **kwargs):
+        return super(self.__class__, self).dispatch(request, *args, **kwargs)
