@@ -37,6 +37,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.strike {
+    text-decoration: line-through;
+}
+
 header#header, footer#footer, #main {
     width: 965px;
     margin: 0px auto;
