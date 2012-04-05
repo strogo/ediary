@@ -94,6 +94,7 @@ class Article(TranslatableModel):
     class Meta:
         verbose_name = _(u'Article')
         verbose_name_plural = _(u'Articles')
+        get_latest_by = 'published'
 
     def __unicode__(self):
         return self.safe_translation_getter('title', self.slug)
