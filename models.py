@@ -119,9 +119,9 @@ class Article(TranslatableModel):
         return [tag.lstrip() for tag in self.tagline.split(',')]
 
     def intro(self):
-        pattern = re.compile(r'(.*)..\s+readmore.*', re.S)
+        pattern = re.compile(r'(.*)\.\.\s+readmore.*', re.S)
         intro = re.match(pattern, self.text)
-        return intro.groups(0)[0] if intro else self.text[:300]
+        return intro.groups(0)[0] if intro else self.text[:500]
 
 
 class NavigationLink(TranslatableModel):
