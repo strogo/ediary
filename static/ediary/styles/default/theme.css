@@ -9,9 +9,14 @@
     padding: 0;
 }
 
-.left {
-    float: left;
+.align-left { float: left; }
+.align-right { float: right; }
+.align-center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
 }
+
 
 body {
     font-family:  Verdana, sans-serif, Tahoma, Arial, 'Times New Roman';
@@ -204,7 +209,8 @@ article header .other_languages a {
     border-bottom: 1px dashed #777;
 }
 
-article blockquote {
+article blockquote,
+section#comments blockquote {
     margin: 5px 0px 5px 2px;
     padding: 1px 30px 1px 15px;
     border-left: 1px dashed #396ea2;
@@ -212,11 +218,30 @@ article blockquote {
     font-size: 0.9em;
 }
 
-article .content a {
+article dt,
+section#comments dt {
+    margin-top: 5px;
+}
+
+article dd,
+section#comments dd {
+    padding: 5px;
+    margin-left: 25px;
+}
+
+article dd .first,
+section#comments dd .first {
+    margin-top: 0px;
+}
+
+
+article .content a,
+section#comments a {
     color: #00669a;
 }
 
-article .content a:hover {
+article .content a:hover,
+section#comments a:hover {
     color: #ff0002;
 }
 
@@ -235,6 +260,7 @@ article .content h2 {
 }
 
 article .content img {
+    margin: 5px 10px 10px 0px;
     max-width: 100%;
     border: 1px solid #ccc;
 }
@@ -244,30 +270,32 @@ article a.readmore {
     float: right;
 }
 
-article p {
+article p,
+section#comments p {
     margin: 10px 0px;
     line-height: 1.5em;
 }
 
-article .content em {
+article .content em,
+section#comments em {
     color: #4e1e1e;
     font-style: normal;
 }
 
 article ul,
-article ol {
+article ol,
+section#comments ul,
+section#comments ol {
     margin-left: 40px;
 }
 
-article pre.code {
+article pre.code,
+section#comments pre.code {
     font-size: 0.9em;
     margin: 15px 0;
     padding: 5px;
 }
 
-article .content img {
-    margin: 0px 10px 10px 0px;
-}
 
 /*---------------------------------------------------------------------------*
  * ASIDE SECTION
