@@ -384,19 +384,6 @@ aside .online ul li a:hover {
     text-decoration: underline;
 }
 
-aside .online ul li a.twitter { background: url('social.png') 0px 0px no-repeat;}
-aside .online ul li a.github { background: url('social.png') 0px -16px no-repeat;}
-aside .online ul li a.lastfm { background: url('social.png') 0px -32px no-repeat;}
-aside .online ul li a.picasa { background: url('social.png') 0px -48px no-repeat;}
-aside .online ul li a.linkedin { background: url('social.png') 0px -64px no-repeat;}
-aside .online ul li a.google { background: url('social.png') 0px -80px no-repeat;}
-
-aside .online ul li a.twitter:hover { background: url('social.png') 0px -96px no-repeat;}
-aside .online ul li a.github:hover { background: url('social.png') 0px -112px no-repeat;}
-aside .online ul li a.lastfm:hover { background: url('social.png') 0px -128px no-repeat;}
-aside .online ul li a.picasa:hover { background: url('social.png') 0px -144px no-repeat;}
-aside .online ul li a.linkedin:hover { background: url('social.png') 0px -160px no-repeat;}
-aside .online ul li a.google:hover { background: url('social.png') 0px -176px no-repeat;}
 
 /*---------------------------------------------------------------------------*
  * FOOTER SECTION
