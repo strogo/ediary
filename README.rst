@@ -6,26 +6,103 @@
  About
 =======
 
-**eDiary** is an easy to use blog application for django. It developed by
+**eDiary** is an easy to use blog application for Django_. It was developed by
 developer for developers.
 
-The application support all classical features:
+The application supports all classic features:
 
 - nice urls
 - categories
 - tags
-- drafts (with post preview)
-- code highlighting
-- markdown markup language
+- drafts (including post preview)
+- code highlighting (works with docutils 0.9 and higher)
+- reStructuredText markup language
+- multilingual posts
+
+Example: `www.kalnitsky.org`_
+
+
+    NOTE: ``docutils 0.9`` is a current development version
 
 
 ==============
  Installation
 ==============
 
-TODO: add installation description
+**eDiary** depends on two third-party libraries:
+
+- ``pygments`` — used for code highlighting
+- ``django-hvad`` — used for multilingual content
+
+You should install these libraries before using project::
+
+    $ sudo pip install pygments
+    $ sudo pip install django_hvad
+
+Then add ``eDiary`` application to ``INSTALLED_APPS``::
+
+    INSTALLED_APPS = (
+        # ...
+
+        'ediary',
+    )
 
 
-write about ``.. readmore ``
-write about all dependencies
-write about settings.LANGUAGES
+Make sure that ``INSTALLED_APPS`` also contains following items::
+
+    INSTALLED_APPS = (
+        # ...
+
+        'django.contrib.staticfiles',   # used for accessing static content
+        'django.contrib.comments',      # used for adding comment system
+        'django.contrib.sitemaps',      # used for generating sitemaps
+        'django.contrib.markup',        # used for reST markup
+
+        # ...
+
+        'nani', # it's django-hvad
+    )
+
+
+=============
+ Usage notes
+=============
+
+0. If eDiary finds ``.. readmore`` anywhere in the post it replaces last one
+   with **readmore** link.
+
+1. Set ``EDIARY_TITLE`` in ``settings.py`` for changing blog title.
+
+2. Set ``EDIARY_SUBTITLE`` in ``settings.py`` for changing blog description.
+
+3. Set ``EDIARY_STYLE`` in ``settings.py`` for changing blog style.
+
+4. Set ``EDIARY_DEFAULT_LANGUAGE`` in ``settings.py`` for changing default
+   language.
+
+5. Set ``EDIARY_PAGINATEBY`` in ``settings.py`` for changing posts per page.
+
+6. Set ``EDIARY_COPYRIGHT_YEAR`` in ``settings.py`` for changing copyright year
+   in blog footer.
+
+7. Set ``EDIARY_COPYRIGHT`` in ``settings.py`` for changing copyright text in
+   blg footer.
+
+8. Set ``EDIARY_COPYRIGHT_URL`` in ``settings.py`` for changing copyroght url
+   in blog footer.
+
+
+============
+ FAQ
+============
+
+0. **Why the reST markup language dosn't work?**
+
+   Django reST filter depends on ``docutils`` project. So make sure that
+   last one is installed in your system. ::
+
+       $ sudo pip install docutils
+
+
+.. _Django: http://www.djangoproject.com/
+.. _`www.kalnitsky.org`: http://www.kalnitsky.org/blog/
