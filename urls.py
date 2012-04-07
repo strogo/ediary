@@ -38,7 +38,7 @@ urlpatterns = patterns('',
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[^/]+)/'
         + '{}$'.format(LANG_PATTERN), ShowArticle.as_view(),
         name='ediary-article'),
-    url(r'^draft/(?P<id>\d+)/{}$'.format(LANG_PATTERN), ShowDraft.as_view(),
+    url(r'^draft/(?P<pk>\d+)/{}$'.format(LANG_PATTERN), ShowDraft.as_view(),
         name='ediary-draft'),
 
     # category and tag

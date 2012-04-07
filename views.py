@@ -57,11 +57,11 @@ class ShowCategory(ArticlesList):
 
     def get_queryset(self):
         category = get_object_or_404(Category, slug=self.kwargs['category'])
-        qs = super(self.__class__, self).get_queryset()
+        qs = super(ShowCategory, self).get_queryset()
         return qs.filter(category=category)
 
     def get_context_data(self, **kwargs):
-        context = super(self.__class__, self).get_context_data(**kwargs)
+        context = super(ShowCategory, self).get_context_data(**kwargs)
         context['additional_title'] = self.kwargs['category']
         return context
 
@@ -74,7 +74,7 @@ class ShowTag(ArticlesList):
         return qs.filter(tagline__icontains=self.kwargs['tag'])
 
     def get_context_data(self, **kwargs):
-        context = super(self.__class__, self).get_context_data(**kwargs)
+        context = super(ShowTag, self).get_context_data(**kwargs)
         context['additional_title'] = self.kwargs['tag']
         return context
 
@@ -91,7 +91,7 @@ class ShowArticle(DetailView):
         return super(ShowArticle, self).get_object()
 
     def get_context_data(self, **kwargs):
-        context = super(self.__class__, self).get_context_data(**kwargs)
+        context = super(ShowArticle, self).get_context_data(**kwargs)
         context = dict(context, **get_common_context())
         return context
 
@@ -100,4 +100,4 @@ class ShowDraft(ShowArticle):
     ''' Show darft. Protect from guests. '''
     @method_decorator(login_required())
     def dispatch(self, request, *args, **kwargs):
-        return super(self.__class__, self).dispatch(request, *args, **kwargs)
+        return super(ShowDraft, self).dispatch(request, *args, **kwargs)
