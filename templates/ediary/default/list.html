@@ -43,7 +43,11 @@
   {% if paginator.num_pages > 1 %}
   <div class="pagination">
     {% for index in paginator.page_range %}
-    <a href="?page={{ index }}">{{ index }}</a>
+      {% if index == page_obj.number %}
+        <span class="current_page">{{ index }}</span>
+      {% else %}
+        <a href="?page={{ index }}">{{ index }}</a>
+      {% endif %}
     {% endfor %}
   </div>
   {% endif %}

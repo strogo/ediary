@@ -98,6 +98,6 @@ class ShowArticle(DetailView):
 
 class ShowDraft(ShowArticle):
     ''' Show darft. Protect from guests. '''
-    @method_decorator(login_required())
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(ShowDraft, self).dispatch(request, *args, **kwargs)

@@ -17,6 +17,11 @@
     display: block;
 }
 
+.strike {
+    text-decoration: line-through;
+}
+
+
 
 body {
     font-family:  Verdana, sans-serif, Tahoma, Arial, 'Times New Roman';
@@ -40,10 +45,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-
-.strike {
-    text-decoration: line-through;
 }
 
 header#header, footer#footer, #main {
@@ -349,42 +350,6 @@ aside .categories ul li a:hover {
 }
 
 
-aside .friends ul {
-    list-style: none;
-    border: 1px solid #ccc;
-}
-
-aside .friends ul li {
-    font-size: 14px;
-    padding: 5px 7px;
-    display: block;
-}
-
-aside .friends ul li a {
-    color: #333;
-}
-
-aside .online ul {
-    list-style: none;
-    border: 1px solid #ccc;
-}
-
-aside .online ul li a {
-    color: #333;
-    font-size: 14px;
-    padding-left: 20px;
-    height: 16px;
-    margin: 7px 0px 7px 4px;
-    display: block;
-    text-decoration: none;
-}
-
-aside .online ul li a:hover {
-    color: #555;
-    text-decoration: underline;
-}
-
-
 /*---------------------------------------------------------------------------*
  * FOOTER SECTION
  *---------------------------------------------------------------------------*/
@@ -421,10 +386,17 @@ footer a:hover {
     margin-bottom: 30px;
 }
 
-.pagination a {
+.pagination a,
+.pagination .current_page {
     border: 1px solid #396ea2;
     padding: 2px 5px;
     margin: 0px 3px;
-    background: #f0f0ff;
+    background: #f4f4ff;
     color: #396ea2;
+}
+
+.pagination .current_page {
+    background: transparent;
+    color: #333;
+    border: 1px solid #777;
 }
