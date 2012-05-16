@@ -48,7 +48,7 @@ Then add ``eDiary`` application to ``INSTALLED_APPS``::
     )
 
 
-Make sure that ``INSTALLED_APPS`` also contains following items::
+ake sure that ``INSTALLED_APPS`` also contains following items::
 
     INSTALLED_APPS = (
         # ...
@@ -62,6 +62,82 @@ Make sure that ``INSTALLED_APPS`` also contains following items::
 
         'nani', # it's django-hvad
     )
+
+Before using make sure that ``LANGUAGE_CODE`` is valid. The list of
+valid values can be found in the ``LANGUAGES`` variable. By default
+the following codes are valid::
+
+    'ar' — Arabic
+    'az' — Azerbaijani
+    'bg' — Bulgarian
+    'bn' — Bengali
+    'bs' — Bosnian
+    'ca' — Catalan
+    'cs' — Czech
+    'cy' — Welsh
+    'da' — Danish
+    'de' — German
+    'el' — Greek
+    'en' — English'
+    'en-gb' — British English
+    'eo' — Esperanto
+    'es' — Spanish
+    'es-ar' — Argentinian Spanish
+    'es-mx' — Mexican Spanish
+    'es-ni' — Nicaraguan Spanish
+    'et' — Estonian
+    'eu' — Basque
+    'fa' — Persian
+    'fi' — Finnish
+    'fr' — French
+    'fy-nl' — Frisian
+    'ga' — Irish
+    'gl' — Galician
+    'he' — Hebrew
+    'hi' — Hindi
+    'hr' — Croatian
+    'hu' — Hungarian
+    'id' — Indonesian
+    'is' — Icelandic
+    'it' — Italian
+    'ja' — Japanese
+    'ka' — Georgian
+    'kk' — Kazakh
+    'km' — Khmer
+    'kn' — Kannada
+    'ko' — Korean
+    'lt' — Lithuanian
+    'lv' — Latvian
+    'mk' — Macedonian
+    'ml' — Malayalam
+    'mn' — Mongolian
+    'nb' — Norwegian Bokmal
+    'ne' — Nepali
+    'nl' — Dutch
+    'nn' — Norwegian Nynorsk
+    'pa' — Punjabi
+    'pl' — Polish
+    'pt' — Portuguese
+    'pt-br' — Brazilian Portuguese
+    'ro' — Romanian
+    'ru' — Russian
+    'sk' — Slovak
+    'sl' — Slovenian
+    'sq' — Albanian
+    'sr' — Serbian
+    'sr-latn' — Serbian Latin
+    'sv' — Swedish
+    'sw' — Swahili
+    'ta' — Tamil
+    'te' — Telugu
+    'th' — Thai
+    'tr' — Turkish
+    'tt' — Tatar
+    'uk' — Ukrainian
+    'ur' — Urdu
+    'vi' — Vietnamese
+    'zh-cn' — Simplified Chinese
+    'zh-tw' — Traditional Chines
 
 
 =============
@@ -88,9 +164,8 @@ Make sure that ``INSTALLED_APPS`` also contains following items::
 7. Set ``EDIARY_COPYRIGHT`` in ``settings.py`` for changing copyright text in
    blg footer.
 
-8. Set ``EDIARY_COPYRIGHT_URL`` in ``settings.py`` for changing copyroght url
+8. Set ``EDIARY_COPYRIGHT_URL`` in ``settings.py`` for changing copyright url
    in blog footer.
-
 
 ============
  FAQ
@@ -102,6 +177,17 @@ Make sure that ``INSTALLED_APPS`` also contains following items::
    last one is installed in your system. ::
 
        $ sudo pip install docutils
+
+1. **How to limit the list of available languages?**
+
+   Just set ``LANGUAGES`` variable explicitly. For instance:::
+
+       LANGUAGES = (
+           ('en', _(u'Еnglish')),
+           ('ru', _(u'Russian')),
+       )
+
+   It also removes the unnecessary language tabs from admin page.
 
 
 .. _Django: http://www.djangoproject.com/
