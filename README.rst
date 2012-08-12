@@ -2,6 +2,9 @@
  eDiary
 ###############################################################################
 
+    **NOTE:** At the moment I don't support this project. The sources
+    licensed under GPLv3 so anyone can continue development of eDiary.
+
 =======
  About
 =======
@@ -19,11 +22,6 @@ The application supports all classic features:
 - reStructuredText markup language
 - multilingual posts
 
-Example: `www.kalnitsky.org`_
-
-
-    NOTE: ``docutils 0.9`` is a current development version
-
 
 ==============
  Installation
@@ -33,11 +31,13 @@ Example: `www.kalnitsky.org`_
 
 - ``pygments`` — used for code highlighting
 - ``django-hvad`` — used for multilingual content
+- ``docutils`` — used for converting reStructuredText to html
 
 You should install these libraries before using project::
 
     $ sudo pip install pygments
     $ sudo pip install django_hvad
+    $ sudo pip install docutils
 
 Then add ``eDiary`` application to ``INSTALLED_APPS``::
 
@@ -191,4 +191,3 @@ the following codes are valid::
 
 
 .. _Django: http://www.djangoproject.com/
-.. _`www.kalnitsky.org`: http://www.kalnitsky.org/blog/
